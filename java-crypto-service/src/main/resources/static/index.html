@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Crypto Service UI</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<header>
+    <h1>Криптосервис</h1>
+    <p>PKCS#7 подпись · шифрование AES+RSA · хэш · загрузка по HTTPS</p>
+</header>
+
+<main>
+    <section class="card">
+        <h2>Входные данные</h2>
+        <div class="toggle" id="sourceToggle">
+            <button type="button" class="active" data-source="text">Текст</button>
+            <button type="button" data-source="file">Файл</button>
+        </div>
+        <label id="textField">
+            <textarea id="textInput" rows="4" placeholder="Введите текст"></textarea>
+        </label>
+        <label id="fileField" hidden>
+            <input type="file" id="fileInput"/>
+        </label>
+    </section>
+
+    <section class="card">
+        <h2>Операция</h2>
+        <div class="buttons">
+            <button data-op="sign-attached">Подписать (attached)</button>
+            <button data-op="sign-detached">Подписать (detached)</button>
+            <button data-op="verify">Проверить подпись</button>
+            <button data-op="encrypt">Зашифровать</button>
+            <button data-op="decrypt">Расшифровать</button>
+            <button data-op="hash">Хэш SHA-256</button>
+        </div>
+        <label class="check">
+            <input type="checkbox" id="detachedVerify"/>
+            Отсоединённая подпись (detached)
+        </label>
+        <label class="inline">Подпись / конверт (base64) — для проверки и расшифрования
+            <textarea id="signatureInput" rows="3" placeholder="CMS подпись или конверт в base64"></textarea>
+        </label>
+        <label class="inline">URL для загрузки по HTTPS
+            <div class="row">
+                <input type="text" id="urlInput" placeholder="https://example.com/file"/>
+                <button data-op="fetch">Загрузить</button>
+            </div>
+        </label>
+    </section>
+
+    <section class="card">
+        <h2>Результат</h2>
+        <pre id="output">—</pre>
+        <button id="downloadBtn" class="secondary" disabled>Скачать результат</button>
+    </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+server:
+  port: ${SERVER_PORT:8080}
+  ssl:
+    enabled: ${SERVER_SSL_ENABLED:false}
+    key-store: ${TLS_KEYSTORE:../certs/tls/server.p12}
+    key-store-password: ${TLS_KEYSTORE_PASSWORD:changeit}
+    key-store-type: PKCS12
+    client-auth: ${SSL_CLIENT_AUTH:none}
+    trust-store: ${TLS_TRUSTSTORE:../certs/tls/truststore.p12}
+    trust-store-password: ${TLS_TRUSTSTORE_PASSWORD:changeit}
+    trust-store-type: PKCS12
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/crypto}
+    username: ${DB_USER:crypto}
+    password: ${DB_PASSWORD:crypto}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+
+app:
+  keystore:
+    path: ${CRYPTO_KEYSTORE:../certs/crypto/crypto.p12}
+    type: ${CRYPTO_KEYSTORE_TYPE:PKCS12}
+    alias: ${CRYPTO_KEY_ALIAS:crypto}
+    password: ${CRYPTO_KEYSTORE_PASSWORD:changeit}
+    key-password: ${CRYPTO_KEY_PASSWORD:changeit}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    root: INFO
